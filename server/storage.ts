@@ -696,7 +696,7 @@ export class MemStorage implements IStorage {
           "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Half_Dome_from_Glacier_Point%2C_Yosemite_NP_-_Diliff.jpg/1280px-Half_Dome_from_Glacier_Point%2C_Yosemite_NP_-_Diliff.jpg",
         rating: 1500,
         trending: false,
-        lastChange0,
+        lastChange: 0,
       },
       {
         name: "Zion",
