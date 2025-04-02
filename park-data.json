@@ -1,0 +1,47 @@
+[
+  {
+    "name": "Yellowstone",
+    "description": "Located in United States\nPark County, Wyoming\nTeton County, Wyoming\nGallatin County, Montana\nPark County, Montana\nFremont County, Idaho. Yellowstone National Park is a national park of the United States located in the northwest corner of Wyoming and extending into Montana and Idaho. It was established by the 42nd U.S. Congress through the Yellowstone National Park Protection Act and signed into law by President Ulysses S. Grant on March 1, 1872. Yellowstone was the first national park in the U.S. and is also widely held to be the first national park in the world. The park is known for its wildlife and its many geothermal featu...",
+    "iconType": "mountain",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Grand_Canyon_of_yellowstone.jpg/250px-Grand_Canyon_of_yellowstone.jpg",
+    "rating": 1500,
+    "trending": false,
+    "lastChange": 0
+  },
+  {
+    "name": "Yosemite",
+    "description": "Located in Tuolumne, Mariposa, Mono and Madera Counties, California, United States. Yosemite National Park (/joʊˈsɛmɪti/ yoh-SEM-ih-tee) is a national park of the United States in California. It is bordered on the southeast by Sierra National Forest and on the northwest by Stanislaus National Forest. The park is managed by the National Park Service and covers 759,620 acres (1,187 sq mi; 3,074 km2) in four counties – centered in Tuolumne and Mariposa, extending north and east to Mono and south to Madera. Designated a World Heritage Site in 1984, Yosemite is internationally re...",
+    "iconType": "forest",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Tunnel_View%2C_Yosemite_Valley%2C_Yosemite_NP_-_Diliff.jpg/330px-Tunnel_View%2C_Yosemite_Valley%2C_Yosemite_NP_-_Diliff.jpg",
+    "rating": 1500,
+    "trending": false,
+    "lastChange": 0
+  },
+  {
+    "name": "Grand Canyon",
+    "description": "Located in Coconino and Mohave counties, Arizona, United States. Grand Canyon National Park is a national park of the United States located in northwestern Arizona, the 15th site to have been named as a national park. The park's central feature is the Grand Canyon, a gorge of the Colorado River, which is often considered one of the Wonders of the World. The park, which covers 1,217,262 acres (1,901.972 sq mi; 4,926.08 km2) of unincorporated area in Coconino and Mohave counties, received more than 4.7 million recreational visitors in 2023. The Grand Canyon ...",
+    "iconType": "canyon",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Dawn_on_the_S_rim_of_the_Grand_Canyon_%288645178272%29.jpg/330px-Dawn_on_the_S_rim_of_the_Grand_Canyon_%288645178272%29.jpg",
+    "rating": 1500,
+    "trending": false,
+    "lastChange": 0
+  },
+  {
+    "name": "Zion",
+    "description": "Located in Washington, Kane, and Iron counties, Utah, United States. Zion National Park is a national park of the United States located in southwestern Utah near the town of Springdale. Located at the junction of the Colorado Plateau, Great Basin, and Mojave Desert regions, the park has a unique geography and a variety of life zones that allow for unusual plant and animal diversity. Numerous plant species as well as 289 species of birds, 75 mammals (including 19 species of bat), and 32 reptiles inhabit the park's four life zones: desert, riparian, woodland, an...",
+    "iconType": "desert",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Zion_angels_landing_view.jpg/284px-Zion_angels_landing_view.jpg",
+    "rating": 1500,
+    "trending": false,
+    "lastChange": 0
+  },
+  {
+    "name": "Glacier",
+    "description": "",
+    "iconType": "mountain",
+    "imageUrl": "",
+    "rating": 1500,
+    "trending": false,
+    "lastChange": 0
+  }
+]

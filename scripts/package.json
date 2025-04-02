@@ -1,0 +1,9 @@
+{
+  "name": "park-data-fetcher",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Script to fetch National Park data from Wikipedia",
+  "scripts": {
+    "fetch": "tsx fetch-park-data.ts"
+  }
+}
