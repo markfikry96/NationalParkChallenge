@@ -107,6 +107,26 @@ function RankItem({ park }: RankItemProps) {
               src={park.imageUrl} 
               alt={park.name} 
               className="w-full h-full object-cover"
+              onError={(e) => {
+                const target = e.currentTarget;
+                target.onerror = null; // Prevent infinite loop
+                
+                // Try to fix common issues with Wikipedia image URLs
+                const originalUrl = park.imageUrl || '';
+                let fixedUrl = originalUrl;
+                
+                // Try to fix special character encoding issues
+                if (originalUrl.includes('Haleakal')) {
+                  fixedUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Haleakala_crater.jpg/1280px-Haleakala_crater.jpg";
+                } else if (originalUrl.includes('Kings_Canyon')) {
+                  fixedUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Kings_Canyon_National_Park_-_Dusy_Basin.jpg/1280px-Kings_Canyon_National_Park_-_Dusy_Basin.jpg";
+                }
+                
+                // If we have a fixed URL, try that
+                target.src = fixedUrl !== originalUrl 
+                  ? fixedUrl 
+                  : `https://source.unsplash.com/100x100/?national,park,${encodeURIComponent(park.name.replace(/ā/g, 'a').replace(/ô/g, 'o'))}`;
+              }}
             />
           </div>
         ) : (

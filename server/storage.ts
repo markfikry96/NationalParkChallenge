@@ -369,7 +369,7 @@ export class MemStorage implements IStorage {
         description: "Hawaii's dormant volcano and unique landscapes.",
         iconType: "volcanic",
         imageUrl:
-          "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Haleakala_crater.jpg/1280px-Haleakala_crater.jpg",
+          "https://upload.wikimedia.org/wikipedia/commons/b/b6/Haleakala_crater.jpg",
         rating: 1500,
         trending: false,
         lastChange: 0,
@@ -450,7 +450,7 @@ export class MemStorage implements IStorage {
         description: "California's deep canyons and towering sequoias.",
         iconType: "canyon",
         imageUrl:
-          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Kings_Canyon.jpg/1280px-Kings_Canyon.jpg",
+          "https://upload.wikimedia.org/wikipedia/commons/c/c7/Kings_Canyon_National_Park_-_Dusy_Basin.jpg",
         rating: 1500,
         trending: false,
         lastChange: 0,

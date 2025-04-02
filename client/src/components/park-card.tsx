@@ -60,7 +60,25 @@ export default function ParkCard({ park, onVote, isVoting, color = "green" }: Pa
             onError={(e) => {
               const target = e.currentTarget;
               target.onerror = null; // Prevent infinite loop
-              target.src = `https://source.unsplash.com/800x400/?national,park,${encodeURIComponent(park.name)}`;
+              
+              // Try to fix common issues with Wikipedia image URLs
+              const originalUrl = park.imageUrl || '';
+              let fixedUrl = originalUrl;
+              
+              // Try to fix special character encoding issues
+              if (originalUrl.includes('Haleakal')) {
+                fixedUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Haleakala_crater.jpg/1280px-Haleakala_crater.jpg";
+              } else if (originalUrl.includes('Kings_Canyon')) {
+                fixedUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Kings_Canyon_National_Park_-_Dusy_Basin.jpg/1280px-Kings_Canyon_National_Park_-_Dusy_Basin.jpg";
+              }
+              
+              // If we have a fixed URL that's different from the original, try that first
+              if (fixedUrl !== originalUrl) {
+                target.src = fixedUrl;
+              } else {
+                // Otherwise fall back to Unsplash
+                target.src = `https://source.unsplash.com/800x400/?national,park,${encodeURIComponent(park.name.replace(/ā/g, 'a').replace(/ô/g, 'o'))}`;
+              }
             }}
           />
         ) : (
