@@ -51,15 +51,16 @@ export default function ParkCard({ park, onVote, isVoting, color = "green" }: Pa
         )}
       </div>
       
-      {park.imageUrl && (
-        <div className="w-full h-40 mb-4 rounded-lg overflow-hidden">
-          <img 
-            src={park.imageUrl} 
-            alt={`${park.name} National Park`} 
-            className="w-full h-full object-cover"
-          />
-        </div>
-      )}
+      <div className="w-full h-40 mb-4 rounded-lg overflow-hidden bg-gray-100">
+        <img 
+          src={park.imageUrl || `https://source.unsplash.com/featured/?national,park,${encodeURIComponent(park.name)}`}
+          alt={`${park.name} National Park`} 
+          className="w-full h-full object-cover"
+          onError={(e) => {
+            e.currentTarget.src = `https://source.unsplash.com/featured/?national,park,${encodeURIComponent(park.name)}`;
+          }}
+        />
+      </div>
       
       <p className="text-sm text-gray-600 mb-4 line-clamp-3">
         {park.description}
