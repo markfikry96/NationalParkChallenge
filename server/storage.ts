@@ -709,17 +709,7 @@ export class MemStorage implements IStorage {
         lastChange: 0,
       },
 
-      {
-        name: "Joshua Tree",
-        description:
-          "Located at the intersection of the Mojave and Colorado deserts in Southern California, known for its twisted, contorted Joshua trees.",
-        iconType: "desert",
-        imageUrl:
-          "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Joshua_Tree_-_Rock_Formation_in_Hidden_Valley.jpg/1280px-Joshua_Tree_-_Rock_Formation_in_Hidden_Valley.jpg",
-        rating: 1550,
-        trending: false,
-        lastChange: -1,
-      },
+      
       {
         name: "Great Smoky Mountains",
         description:
