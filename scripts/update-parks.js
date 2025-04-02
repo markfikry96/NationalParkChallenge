@@ -1,30 +1,27 @@
 import fetch from 'node-fetch';
 import * as cheerio from 'cheerio';
 import * as fs from 'fs';
-import * as fsPromises from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-// Get the directory name
+// Get the directory name in ESM
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Import from schema
-import { ParkIconType } from '../shared/schema.js';
-
-// Define the InsertPark type here to avoid import issues
-type InsertPark = {
-  name: string;
-  description: string;
-  iconType: string;
-  imageUrl: string;
-  rating: number;
-  trending: boolean;
-  lastChange: number;
+// Define ParkIconType constants here since we can't import directly from TypeScript
+const ParkIconType = {
+  MOUNTAIN: 'mountain',
+  CANYON: 'canyon',
+  DESERT: 'desert',
+  LAKE: 'lake',
+  FOREST: 'forest',
+  COASTAL: 'coastal',
+  VOLCANIC: 'volcanic',
+  CAVE: 'cave'
 };
 
 // Helper function to determine the park icon type based on name and description
-function determineParkIconType(name: string, description: string): string {
+function determineParkIconType(name, description) {
   const lowerName = name.toLowerCase();
   const lowerDesc = description.toLowerCase();
   
@@ -80,7 +77,7 @@ function determineParkIconType(name: string, description: string): string {
 /**
  * Scrapes data from a Wikipedia page for a national park
  */
-async function fetchParkData(parkName: string): Promise<InsertPark | null> {
+async function fetchParkData(parkName) {
   try {
     // Format park name for Wikipedia URL
     const formattedName = parkName.replace(/ /g, '_') + '_National_Park';
@@ -93,7 +90,7 @@ async function fetchParkData(parkName: string): Promise<InsertPark | null> {
     // Handle special cases
     if (!response.ok) {
       // Special case handling for parks with different naming conventions
-      const specialCases: Record<string, string> = {
+      const specialCases = {
         'Acadia': 'Acadia_National_Park',
         'American Samoa': 'National_Park_of_American_Samoa',
         'Arches': 'Arches_National_Park',
@@ -255,7 +252,7 @@ async function fetchParkData(parkName: string): Promise<InsertPark | null> {
     return {
       name: parkName,
       description: richDescription,
-      iconType: iconType as ParkIconType,
+      iconType: iconType,
       imageUrl: imageUrl,
       rating: 1500,
       trending: false,
@@ -271,7 +268,7 @@ async function fetchParkData(parkName: string): Promise<InsertPark | null> {
 /**
  * Fetch all national parks from the Wikipedia list page
  */
-async function fetchParkList(): Promise<string[]> {
+async function fetchParkList() {
   try {
     const url = 'https://en.wikipedia.org/wiki/List_of_national_parks_of_the_United_States';
     console.log(`Fetching national parks list from ${url}`);
@@ -285,7 +282,7 @@ async function fetchParkList(): Promise<string[]> {
     const $ = cheerio.load(html);
     
     // Extract park names from the table
-    const parkNames: string[] = [];
+    const parkNames = [];
     
     // The parks are in a table with links to each park
     $('.wikitable tbody tr').each((i, row) => {
@@ -310,127 +307,12 @@ async function fetchParkList(): Promise<string[]> {
 }
 
 /**
- * Main function to fetch and save park data in batches
+ * Generate storage.ts file from parks data
  */
-async function fetchAllParksData() {
-  console.log('Starting data fetch for all national parks...');
-  
-  // Get the list of all national parks from Wikipedia
-  let parkNames = await fetchParkList();
-  
-  if (parkNames.length === 0) {
-    console.error('Failed to fetch park names from Wikipedia. Using backup list.');
-    // Backup list in case the Wikipedia fetch fails
-    parkNames = [
-      "Acadia", "American Samoa", "Arches", "Badlands", "Big Bend", 
-      "Biscayne", "Black Canyon of the Gunnison", "Bryce Canyon", "Canyonlands", "Capitol Reef",
-      "Carlsbad Caverns", "Channel Islands", "Congaree", "Crater Lake", "Cuyahoga Valley",
-      "Death Valley", "Denali", "Dry Tortugas", "Everglades", "Gates of the Arctic",
-      "Gateway Arch", "Glacier", "Glacier Bay", "Grand Canyon", "Grand Teton",
-      "Great Basin", "Great Sand Dunes", "Great Smoky Mountains", "Guadalupe Mountains", "Haleakalā",
-      "Hawaiʻi Volcanoes", "Hot Springs", "Indiana Dunes", "Isle Royale", "Joshua Tree",
-      "Katmai", "Kenai Fjords", "Kings Canyon", "Kobuk Valley", "Lake Clark",
-      "Lassen Volcanic", "Mammoth Cave", "Mesa Verde", "Mount Rainier", "New River Gorge",
-      "North Cascades", "Olympic", "Petrified Forest", "Pinnacles", "Redwood",
-      "Rocky Mountain", "Saguaro", "Sequoia", "Shenandoah", "Theodore Roosevelt",
-      "Virgin Islands", "Voyageurs", "White Sands", "Wind Cave", "Wrangell–St. Elias",
-      "Yellowstone", "Yosemite", "Zion"
-    ];
-  }
-  
-  // Try to load existing park data first to determine batch size
-  let parksData: InsertPark[] = [];
-  let existingCount = 0;
-  
-  try {
-    if (fs.existsSync(path.join(__dirname, '../park-data.json'))) {
-      console.log('Found existing park-data.json, loading data...');
-      const existingData = await fsPromises.readFile(path.join(__dirname, '../park-data.json'), 'utf8');
-      parksData = JSON.parse(existingData);
-      existingCount = parksData.length;
-      console.log(`Loaded ${existingCount} parks from existing data`);
-      
-      // Filter out parks we've already processed
-      const existingParkNames = parksData.map(p => p.name);
-      const remainingParks = parkNames.filter(name => !existingParkNames.includes(name));
-      console.log(`${existingParkNames.length} parks already processed, ${remainingParks.length} remaining`);
-      
-      // If all parks are already processed, we're done
-      if (remainingParks.length === 0) {
-        console.log('All parks already processed!');
-        
-        // Generate TypeScript code for updating the storage.ts file
-        await generateStorageFile(parksData);
-        return;
-      }
-      
-      // Update park names to only process remaining parks
-      parkNames = remainingParks;
-    }
-  } catch (error) {
-    console.error('Error loading existing park data:', error);
-    console.log('Starting with fresh data collection');
-  }
-  
-  // Adjust batch size based on how many we've already done
-  // If we have many parks already, process more to complete the set
-  let BATCH_SIZE = 10; // Default size
-  
-  if (existingCount > 40) { // If we have more than 40 parks, process all remaining
-    BATCH_SIZE = parkNames.length;
-  } else if (existingCount > 20) { // If we have more than 20, process 20 more
-    BATCH_SIZE = 20;
-  }
-  
-  console.log(`Using batch size of ${BATCH_SIZE}`);
-  const parksToProcess = parkNames.slice(0, BATCH_SIZE);
-  console.log(`Processing ${parksToProcess.length} parks out of ${parkNames.length}`);
-  
-  // Process parks sequentially to avoid rate limiting
-  for (const park of parksToProcess) {
-    console.log(`Processing park: ${park}`);
-    const parkData = await fetchParkData(park);
-    if (parkData) {
-      console.log(`Found data for ${park}`);
-      parksData.push(parkData);
-    } else {
-      console.log(`No data found for ${park}, using default values`);
-      
-      // Create a default entry if scraping fails
-      parksData.push({
-        name: park,
-        description: `${park} National Park, one of America's natural treasures.`,
-        iconType: 'mountain' as ParkIconType,
-        imageUrl: '',
-        rating: 1500,
-        trending: false,
-        lastChange: 0
-      });
-    }
-    
-    // Save after each park to avoid losing progress
-    console.log('Saving progress...');
-    await fs.writeFile(
-      path.join(__dirname, '../park-data.json'), 
-      JSON.stringify(parksData, null, 2)
-    );
-    
-    // Add a small delay between requests to be respectful to Wikipedia
-    await new Promise(resolve => setTimeout(resolve, 1000));
-  }
-  
-  // Save the results to a JSON file for reference
-  const outputPath = path.join(__dirname, '../park-data.json');
-  await fs.writeFile(
-    outputPath, 
-    JSON.stringify(parksData, null, 2)
-  );
-  
-  console.log(`Saved park data to ${outputPath}`);
-  
-  // Generate TypeScript code for updating the storage.ts file
-  let storageFileContent = `// This file was generated by fetch-park-data.ts
-import { InsertPark, InsertUser, Matchup, Park, ParkWithRank, User } from "../shared/schema";
+async function generateStorageFile(parks) {
+  const storageContent = `// This file was generated by update-parks.js
+import { InsertPark, InsertUser, Matchup, Park, ParkWithRank, User, InsertMatchup, ParkIconType } from "../shared/schema";
+import fs from 'fs';
 
 export interface IStorage {
   // User methods (required by template)
@@ -479,12 +361,57 @@ export class MemStorage implements IStorage {
 
   // Initialize with national parks data
   private initializeParks() {
-    const nationalParks: InsertPark[] = ${JSON.stringify(parksData, null, 2)};
+    let nationalParks: InsertPark[] = [];
+    
+    try {
+      // Try to load from park-data.json if it exists
+      if (fs.existsSync('./park-data.json')) {
+        console.log('Loading parks from park-data.json');
+        const parksData = fs.readFileSync('./park-data.json', 'utf8');
+        const parsedParks = JSON.parse(parksData);
+        
+        // Ensure icons are properly converted to ParkIconType
+        nationalParks = parsedParks.map((park: any) => ({
+          ...park,
+          iconType: park.iconType as ParkIconType,
+          trending: park.trending ?? false,
+          lastChange: park.lastChange ?? 0
+        }));
+        
+        console.log(\`Loaded \${nationalParks.length} parks from park-data.json\`);
+      } else {
+        console.log('park-data.json not found, using default parks');
+        // Use default parks
+        nationalParks = [
+          {
+            "name": "Yellowstone",
+            "description": "Located in United States, the first national park in the U.S.",
+            "iconType": ParkIconType.MOUNTAIN,
+            "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Grand_Canyon_of_yellowstone.jpg/250px-Grand_Canyon_of_yellowstone.jpg",
+            "rating": 1500,
+            "trending": false,
+            "lastChange": 0
+          },
+          {
+            "name": "Yosemite",
+            "description": "Located in California. Famous for its waterfalls and giant sequoia trees.",
+            "iconType": ParkIconType.FOREST,
+            "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Tunnel_View%2C_Yosemite_Valley%2C_Yosemite_NP_-_Diliff.jpg/330px-Tunnel_View%2C_Yosemite_Valley%2C_Yosemite_NP_-_Diliff.jpg",
+            "rating": 1500,
+            "trending": false,
+            "lastChange": 0
+          }
+        ];
+      }
+    } catch (error) {
+      console.error('Error loading parks data:', error);
+      nationalParks = [];
+    }
 
     // Add parks to the store
     nationalParks.forEach((park) => this.createPark(park));
 
-    // Update park rankings
+    // Update rankings
     this.updateRankings();
   }
 
@@ -532,10 +459,17 @@ export class MemStorage implements IStorage {
 
   async createPark(insertPark: InsertPark): Promise<Park> {
     const id = this.parkIdCounter++;
+    // We need to manually construct the Park object to ensure correct types
     const park: Park = {
-      ...insertPark,
       id,
+      name: insertPark.name,
+      description: insertPark.description,
+      iconType: insertPark.iconType as ParkIconType,  // Type assertion to ensure compatibility
+      imageUrl: insertPark.imageUrl ?? null,
+      rating: insertPark.rating ?? 1500,
       rank: this.parks.size + 1,
+      trending: insertPark.trending ?? null,
+      lastChange: insertPark.lastChange ?? null
     };
     this.parks.set(id, park);
     return park;
@@ -578,6 +512,11 @@ export class MemStorage implements IStorage {
       ...insertMatchup,
       id,
       createdAt: new Date(),
+      winnerId: null,
+      park1OldRating: null,
+      park2OldRating: null,
+      park1NewRating: null,
+      park2NewRating: null
     };
     this.matchups.set(id, matchup);
     return matchup;
@@ -633,9 +572,125 @@ export const storage = new MemStorage();
 `;
 
   const storageOutputPath = path.join(__dirname, '../server/storage.ts');
-  await fs.writeFile(storageOutputPath, storageFileContent);
+  fs.writeFileSync(storageOutputPath, storageContent);
   
   console.log(`Generated and saved new storage.ts file to ${storageOutputPath}`);
+}
+
+/**
+ * Main function to fetch and save park data in batches
+ */
+async function fetchAllParksData() {
+  console.log('Starting data fetch for all national parks...');
+  
+  // Get the list of all national parks from Wikipedia
+  let parkNames = await fetchParkList();
+  
+  if (parkNames.length === 0) {
+    console.error('Failed to fetch park names from Wikipedia. Using backup list.');
+    // Backup list in case the Wikipedia fetch fails
+    parkNames = [
+      "Acadia", "American Samoa", "Arches", "Badlands", "Big Bend", 
+      "Biscayne", "Black Canyon of the Gunnison", "Bryce Canyon", "Canyonlands", "Capitol Reef",
+      "Carlsbad Caverns", "Channel Islands", "Congaree", "Crater Lake", "Cuyahoga Valley",
+      "Death Valley", "Denali", "Dry Tortugas", "Everglades", "Gates of the Arctic",
+      "Gateway Arch", "Glacier", "Glacier Bay", "Grand Canyon", "Grand Teton",
+      "Great Basin", "Great Sand Dunes", "Great Smoky Mountains", "Guadalupe Mountains", "Haleakalā",
+      "Hawaiʻi Volcanoes", "Hot Springs", "Indiana Dunes", "Isle Royale", "Joshua Tree",
+      "Katmai", "Kenai Fjords", "Kings Canyon", "Kobuk Valley", "Lake Clark",
+      "Lassen Volcanic", "Mammoth Cave", "Mesa Verde", "Mount Rainier", "New River Gorge",
+      "North Cascades", "Olympic", "Petrified Forest", "Pinnacles", "Redwood",
+      "Rocky Mountain", "Saguaro", "Sequoia", "Shenandoah", "Theodore Roosevelt",
+      "Virgin Islands", "Voyageurs", "White Sands", "Wind Cave", "Wrangell–St. Elias",
+      "Yellowstone", "Yosemite", "Zion"
+    ];
+  }
+  
+  // Load existing data if it exists
+  let parksData = [];
+  try {
+    if (fs.existsSync(path.join(__dirname, '../park-data.json'))) {
+      console.log('Found existing park-data.json, loading data...');
+      const existingData = fs.readFileSync(path.join(__dirname, '../park-data.json'), 'utf8');
+      parksData = JSON.parse(existingData);
+      console.log(`Loaded ${parksData.length} parks from existing data`);
+      
+      // Filter out parks we've already processed
+      const existingParkNames = parksData.map(p => p.name);
+      const remainingParks = parkNames.filter(name => !existingParkNames.includes(name));
+      console.log(`${existingParkNames.length} parks already processed, ${remainingParks.length} remaining`);
+      
+      // If all parks are already processed, we're done
+      if (remainingParks.length === 0) {
+        console.log('All parks already processed!');
+        await generateStorageFile(parksData);
+        return;
+      }
+      
+      // Update parkNames to only include parks we haven't processed yet
+      parkNames = remainingParks;
+    }
+  } catch (error) {
+    console.error('Error loading existing park data:', error);
+    console.log('Starting with fresh data collection');
+  }
+  
+  // Determine how many parks to process in this batch
+  let batchSize = 10; // Default size
+  
+  // If we have more than 40 parks, process them all remaining
+  // If we have more than 20, process 20 more
+  if (parksData.length > 40) {
+    batchSize = parkNames.length;
+  } else if (parksData.length > 20) {
+    batchSize = 20;
+  }
+  
+  // Limit batch to the number of remaining parks
+  batchSize = Math.min(batchSize, parkNames.length);
+  
+  console.log(`Processing ${batchSize} parks in this batch`);
+  const parksToProcess = parkNames.slice(0, batchSize);
+  
+  // Process parks sequentially to avoid rate limiting
+  for (const park of parksToProcess) {
+    console.log(`Processing park: ${park}`);
+    const parkData = await fetchParkData(park);
+    if (parkData) {
+      console.log(`Found data for ${park}`);
+      parksData.push(parkData);
+    } else {
+      console.log(`No data found for ${park}, using default values`);
+      
+      // Create a default entry if scraping fails
+      parksData.push({
+        name: park,
+        description: `${park} National Park, one of America's natural treasures.`,
+        iconType: ParkIconType.MOUNTAIN,
+        imageUrl: '',
+        rating: 1500,
+        trending: false,
+        lastChange: 0
+      });
+    }
+    
+    // Save after each park to avoid losing progress
+    console.log('Saving progress...');
+    fs.writeFileSync(
+      path.join(__dirname, '../park-data.json'), 
+      JSON.stringify(parksData, null, 2)
+    );
+    
+    // Add a small delay between requests to be respectful to Wikipedia
+    await new Promise(resolve => setTimeout(resolve, 1000));
+  }
+  
+  console.log(`Processed ${parksToProcess.length} parks, total parks: ${parksData.length}`);
+  
+  // Generate the storage.ts file with updated park data
+  await generateStorageFile(parksData);
+  
+  console.log('Script completed successfully!');
 }
 
 // Execute the function

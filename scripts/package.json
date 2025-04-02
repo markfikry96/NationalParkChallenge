@@ -1,9 +1,17 @@
 {
-  "name": "park-data-fetcher",
+  "name": "national-parks-scripts",
   "version": "1.0.0",
+  "description": "Scripts for the National Parks project",
+  "main": "index.js",
   "type": "module",
-  "description": "Script to fetch National Park data from Wikipedia",
   "scripts": {
-    "fetch": "tsx fetch-park-data.ts"
+    "update-parks": "node update-parks.js",
+    "fetch-images": "node fetch-park-images.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.12",
+    "node-fetch": "^3.3.2"
   }
 }
