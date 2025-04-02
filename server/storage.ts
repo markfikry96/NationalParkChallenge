@@ -420,7 +420,7 @@ export class MemStorage implements IStorage {
         description: "California's unique desert landscapes and iconic trees.",
         iconType: "desert",
         imageUrl:
-          "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Joshua_Tree_-_Rock_Formation_in_Hidden_Valley.jpg/1280px-Joshua_Tree_-_Rock_Formation_in_Hidden_Valley.jpg",
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Joshua_Tree_-_Rock_formation_in_Real_Hidden_Valley_1.jpg/330px-Joshua_Tree_-_Rock_formation_in_Real_Hidden_Valley_1.jpg",
         rating: 1500,
         trending: false,
         lastChange: 0,
