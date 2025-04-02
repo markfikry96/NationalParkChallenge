@@ -346,12 +346,12 @@ export class MemStorage implements IStorage {
       {
         name: "Great Smoky Mountains",
         description:
-          "Ancient mountains straddling Tennessee and North Carolina.",
+          "The scenic ridge line along the border between North Carolina and Tennessee, known for its diverse plant and animal life.",
         iconType: "mountain",
         imageUrl:
           "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Mountain_vista_Great_Smoky_Mountains_National_Park.jpg/1280px-Mountain_vista_Great_Smoky_Mountains_National_Park.jpg",
-        rating: 1500,
-        trending: false,
+        rating: 1530,
+        trending: true,
         lastChange: 0,
       },
       {
@@ -696,7 +696,7 @@ export class MemStorage implements IStorage {
           "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Half_Dome_from_Glacier_Point%2C_Yosemite_NP_-_Diliff.jpg/1280px-Half_Dome_from_Glacier_Point%2C_Yosemite_NP_-_Diliff.jpg",
         rating: 1500,
         trending: false,
-        lastChange: 0,
+        lastChange0,
       },
       {
         name: "Zion",
@@ -704,118 +704,6 @@ export class MemStorage implements IStorage {
         iconType: "canyon",
         imageUrl:
           "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Angels_Landing.jpg/1280px-Angels_Landing.jpg",
-        rating: 1500,
-        trending: false,
-        lastChange: 0,
-      },
-
-      
-      {
-        name: "Great Smoky Mountains",
-        description:
-          "The scenic ridge line along the border between North Carolina and Tennessee, known for its diverse plant and animal life.",
-        iconType: "mountain",
-        imageUrl:
-          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Mountain_vista_Great_Smoky_Mountains_National_Park.jpg/1280px-Mountain_vista_Great_Smoky_Mountains_National_Park.jpg",
-        rating: 1530,
-        trending: true,
-        lastChange: 0,
-      },
-      {
-        name: "Bryce Canyon",
-        description:
-          "Bryce Canyon National Park in southwestern Utah, is famous for crimson-colored hoodoos, which are spire-shaped rock formations.",
-        iconType: "canyon",
-        imageUrl:
-          "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Bryce_Canyon_hoodoos_Amphitheater.jpg/1280px-Bryce_Canyon_hoodoos_Amphitheater.jpg",
-        rating: 1520,
-        trending: true,
-        lastChange: 3,
-      },
-      {
-        name: "Yellowstone",
-        description:
-          "The first national park in the U.S. and widely held to be the first national park in the world, known for its wildlife and geothermal features.",
-        iconType: "volcanic",
-        imageUrl:
-          "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Grand_Prismatic_Spring_2013.jpg/1280px-Grand_Prismatic_Spring_2013.jpg",
-        rating: 1510,
-        trending: false,
-        lastChange: 0,
-      },
-      {
-        name: "Yosemite",
-        description:
-          "Located in California's Sierra Nevada mountains, known for its waterfalls, giant sequoia trees, and impressive valley views.",
-        iconType: "mountain",
-        imageUrl:
-          "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Half_Dome_from_Glacier_Point%2C_Yosemite_NP_-_Diliff.jpg/1280px-Half_Dome_from_Glacier_Point%2C_Yosemite_NP_-_Diliff.jpg",
-        rating: 1500,
-        trending: false,
-        lastChange: 0,
-      },
-      {
-        name: "Zion",
-        description:
-          "Located in southwestern Utah, known for its steep red cliffs, emerald pools, and narrow slot canyons.",
-        iconType: "canyon",
-        imageUrl:
-          "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Angels_Landing.jpg/1280px-Angels_Landing.jpg",
-        rating: 1500,
-        trending: false,
-        lastChange: 0,
-      },
-      {
-        name: "Acadia",
-        description:
-          "Located on Mount Desert Island in Maine, known for its rocky beaches, woodland, and glacier-scoured granite peaks.",
-        iconType: "coastal",
-        imageUrl:
-          "https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Bass_Harbor_Head_Light_Station_2016.jpg/1280px-Bass_Harbor_Head_Light_Station_2016.jpg",
-        rating: 1500,
-        trending: false,
-        lastChange: 0,
-      },
-      {
-        name: "Olympic",
-        description:
-          "Encompassing nearly a million acres on Washington's Olympic Peninsula, featuring glacier-capped mountains, old-growth temperate rain forests, and Pacific coastline.",
-        iconType: "forest",
-        imageUrl:
-          "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hoh_Rainforest%2C_Olympic_National_Park.jpg/1280px-Hoh_Rainforest%2C_Olympic_National_Park.jpg",
-        rating: 1500,
-        trending: false,
-        lastChange: 0,
-      },
-      {
-        name: "Crater Lake",
-        description:
-          "Located in southern Oregon, known for its deep blue lake formed in a crater of an ancient volcano.",
-        iconType: "lake",
-        imageUrl:
-          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Crater_lake_oregon.jpg/1280px-Crater_lake_oregon.jpg",
-        rating: 1500,
-        trending: false,
-        lastChange: 0,
-      },
-      {
-        name: "Arches",
-        description:
-          "Located in eastern Utah, known for its more than 2,000 natural stone arches, including the world-famous Delicate Arch.",
-        iconType: "desert",
-        imageUrl:
-          "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Double_O_Arch_-_Arches_NP.jpg/1280px-Double_O_Arch_-_Arches_NP.jpg",
-        rating: 1500,
-        trending: false,
-        lastChange: 0,
-      },
-      {
-        name: "Shenandoah",
-        description:
-          "Located in the Blue Ridge Mountains in Virginia, featuring cascading waterfalls, spectacular vistas, and quiet wooded hollows.",
-        iconType: "mountain",
-        imageUrl:
-          "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Skylinedrive.jpg/1280px-Skylinedrive.jpg",
         rating: 1500,
         trending: false,
         lastChange: 0,
