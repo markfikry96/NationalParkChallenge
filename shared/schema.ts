@@ -22,6 +22,7 @@ export const parks = pgTable("parks", {
   name: text("name").notNull().unique(),
   description: text("description").notNull(),
   iconType: text("icon_type").notNull().$type<ParkIconType>(),
+  imageUrl: text("image_url"),
   rating: integer("rating").notNull().default(1500),
   rank: integer("rank"),
   trending: boolean("trending").default(false),
@@ -55,7 +56,7 @@ export type Park = typeof parks.$inferSelect;
 export type InsertPark = z.infer<typeof insertParkSchema>;
 export type Matchup = typeof matchups.$inferSelect;
 export type InsertMatchup = z.infer<typeof insertMatchupSchema>;
-export type ParkWithRank = Park & { rankChange?: number };
+export type ParkWithRank = Park & { rankChange: number | null };
 export type Vote = z.infer<typeof voteSchema>;
 
 // Current matchup type for the frontend

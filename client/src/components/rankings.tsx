@@ -101,12 +101,22 @@ function RankItem({ park }: RankItemProps) {
     >
       <div className="flex items-center gap-3">
         <span className="font-display font-bold text-lg">{park.rank}</span>
-        <div className={park.iconType === "mountain" ? "text-park-green-500" : 
-                        park.iconType === "canyon" ? "text-park-blue-500" : 
-                        park.iconType === "desert" ? "text-park-brown-700" : 
-                        "text-park-green-600"}>
-          <ParkIcon type={park.iconType} />
-        </div>
+        {park.imageUrl ? (
+          <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
+            <img 
+              src={park.imageUrl} 
+              alt={park.name} 
+              className="w-full h-full object-cover"
+            />
+          </div>
+        ) : (
+          <div className={park.iconType === "mountain" ? "text-park-green-500" : 
+                          park.iconType === "canyon" ? "text-park-blue-500" : 
+                          park.iconType === "desert" ? "text-park-brown-700" : 
+                          "text-park-green-600"}>
+            <ParkIcon type={park.iconType} />
+          </div>
+        )}
         <span className="font-medium">{park.name}</span>
       </div>
       <div className="flex items-center gap-4 md:gap-12">
@@ -122,7 +132,7 @@ function RankItemSkeleton() {
     <div className="bg-white rounded-lg shadow-card p-4 flex items-center justify-between">
       <div className="flex items-center gap-3">
         <Skeleton className="h-6 w-6 rounded-full" />
-        <Skeleton className="h-5 w-5" />
+        <Skeleton className="h-10 w-10 rounded-full" />
         <Skeleton className="h-5 w-24" />
       </div>
       <div className="flex items-center gap-4 md:gap-12">

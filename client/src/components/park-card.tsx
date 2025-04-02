@@ -28,7 +28,7 @@ export default function ParkCard({ park, onVote, isVoting, color = "green" }: Pa
   };
 
   return (
-    <Card className="bg-white rounded-xl shadow-card hover:shadow-card-hover transition-shadow p-5 w-full md:w-80">
+    <Card className="bg-white rounded-xl shadow-card hover:shadow-card-hover transition-shadow p-5 w-full md:w-80 overflow-hidden">
       <div className="flex items-start gap-2 mb-3">
         <div className={colorClasses[color].icon}>
           <ParkIcon type={park.iconType} />
@@ -51,6 +51,16 @@ export default function ParkCard({ park, onVote, isVoting, color = "green" }: Pa
         )}
       </div>
       
+      {park.imageUrl && (
+        <div className="w-full h-40 mb-4 rounded-lg overflow-hidden">
+          <img 
+            src={park.imageUrl} 
+            alt={`${park.name} National Park`} 
+            className="w-full h-full object-cover"
+          />
+        </div>
+      )}
+      
       <p className="text-sm text-gray-600 mb-4 line-clamp-3">
         {park.description}
       </p>
@@ -68,7 +78,7 @@ export default function ParkCard({ park, onVote, isVoting, color = "green" }: Pa
 
 export function ParkCardSkeleton() {
   return (
-    <Card className="bg-white rounded-xl shadow-card p-5 w-full md:w-80">
+    <Card className="bg-white rounded-xl shadow-card p-5 w-full md:w-80 overflow-hidden">
       <div className="flex items-start gap-2 mb-3">
         <Skeleton className="h-5 w-5 rounded-full" />
         <Skeleton className="h-6 w-40" />
@@ -78,6 +88,9 @@ export function ParkCardSkeleton() {
         <Skeleton className="h-6 w-20 rounded-full" />
         <Skeleton className="h-6 w-20 rounded-full" />
       </div>
+      
+      {/* Image skeleton */}
+      <Skeleton className="h-40 w-full rounded-lg mb-4" />
       
       <div className="space-y-2 mb-4">
         <Skeleton className="h-4 w-full" />
