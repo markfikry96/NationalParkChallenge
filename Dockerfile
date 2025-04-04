@@ -24,7 +24,7 @@ if [ -n "$DATABASE_URL" ]; then\n\
     done\n\
   \'\n\
   echo "Running database migrations..."\n\
-  npx drizzle-kit push:pg\n\
+  npx drizzle-kit push\n\
   npx tsx scripts/migrate-to-db.ts\n\
 else\n\
   echo "DATABASE_URL not set, skipping migrations"\n\
