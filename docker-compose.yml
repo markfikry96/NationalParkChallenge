@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/parks
+      - PGUSER=postgres
+      - PGPASSWORD=postgres
+      - PGDATABASE=parks
+      - PGHOST=db
+      - PGPORT=5432
+    depends_on:
+      - db
+    restart: unless-stopped
+
+  db:
+    image: postgres:16
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=parks
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres_data:
