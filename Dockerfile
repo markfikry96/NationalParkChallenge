@@ -15,16 +15,12 @@ RUN npm ci
 COPY . .
 
 # Create a PostgreSQL database migration script
-RUN echo '#!/bin/sh\n\
+RUN echo $'#!/bin/sh\n\
 if [ -n "$DATABASE_URL" ]; then\n\
   echo "Waiting for PostgreSQL to be ready..."\n\
-  timeout 30s sh -c \'\n\
-    until pg_isready -h $PGHOST -p $PGPORT -U $PGUSER; do\n\
-      sleep 1;\n\
-    done\n\
-  \'\n\
+  timeout 30s sh -c "until pg_isready -h $PGHOST -p $PGPORT -U $PGUSER; do sleep 1; done"\n\
   echo "Running database migrations..."\n\
-  npx drizzle-kit push\n\
+  npx drizzle-kit push:pg\n\
   npx tsx scripts/migrate-to-db.ts\n\
 else\n\
   echo "DATABASE_URL not set, skipping migrations"\n\
