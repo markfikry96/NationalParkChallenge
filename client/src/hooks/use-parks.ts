@@ -1,5 +1,5 @@
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { CurrentMatchup, Park, ParkWithRank, Vote } from "@shared/schema";
+import { CurrentMatchup, Park, ParkWithRank, Vote, LatestVoteResult } from "@shared/schema";
 import { apiRequest } from "@/lib/queryClient";
 import { queryClient } from "@/lib/queryClient";
 import { useState } from "react";
@@ -32,6 +32,8 @@ export function useCurrentMatchup() {
       queryClient.invalidateQueries({ queryKey: ["/api/parks/ranked"] });
       // Get a new matchup after voting
       queryClient.invalidateQueries({ queryKey: ["/api/matchups/random"] });
+      // Invalidate the latest vote result query
+      queryClient.invalidateQueries({ queryKey: ["/api/matchups/latest-result"] });
       
       // Show success toast
       toast({
@@ -77,4 +79,16 @@ export function useCurrentMatchup() {
     voteForPark,
     skipMatchup,
   };
+}
+
+/**
+ * Hook to fetch the latest vote result
+ */
+export function useLatestVoteResult() {
+  return useQuery<LatestVoteResult>({
+    queryKey: ["/api/matchups/latest-result"],
+    staleTime: 30000, // 30 seconds
+    // Don't refetch on window focus to avoid constant refreshing
+    refetchOnWindowFocus: false,
+  });
 }

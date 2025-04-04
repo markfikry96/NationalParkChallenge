@@ -1,6 +1,7 @@
-import { useRankedParks, useCurrentMatchup } from "@/hooks/use-parks";
+import { useRankedParks, useCurrentMatchup, useLatestVoteResult } from "@/hooks/use-parks";
 import Matchup from "@/components/matchup";
 import Rankings from "@/components/rankings";
+import LatestVoteResultCard from "@/components/latest-vote-result";
 import { Park } from "@shared/schema";
 
 export default function Home() {
@@ -17,6 +18,11 @@ export default function Home() {
     data: rankedParks, 
     isLoading: isLoadingRankings 
   } = useRankedParks();
+  
+  const {
+    data: latestVoteResult,
+    isLoading: isLoadingLatestResult
+  } = useLatestVoteResult();
 
   const handleVote = (park: Park) => {
     voteForPark(park.id);
@@ -40,7 +46,7 @@ export default function Home() {
         {/* Main Content */}
         <main>
           {/* Matchup Section */}
-          <section className="mb-12">
+          <section className="mb-8">
             <h2 className="text-2xl font-display font-semibold text-center mb-6">
               Which park would you rather visit?
             </h2>
@@ -55,8 +61,24 @@ export default function Home() {
             />
           </section>
           
+          {/* Latest Vote Result Section */}
+          <section className="mb-8">
+            <h2 className="text-xl font-display font-semibold text-center mb-4">
+              Latest Vote
+            </h2>
+            
+            <LatestVoteResultCard 
+              result={latestVoteResult}
+              isLoading={isLoadingLatestResult}
+            />
+          </section>
+          
           {/* Rankings Section */}
           <section>
+            <h2 className="text-xl font-display font-semibold text-center mb-4">
+              Current Rankings
+            </h2>
+            
             <Rankings parks={rankedParks || []} isLoading={isLoadingRankings} />
           </section>
         </main>

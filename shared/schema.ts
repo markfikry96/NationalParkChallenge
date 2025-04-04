@@ -66,6 +66,18 @@ export type CurrentMatchup = {
   park2: Park;
 };
 
+// Latest vote result type for the frontend
+export type LatestVoteResult = {
+  id: number;
+  winner: Park;
+  loser: Park;
+  winnerOldRating: number;
+  winnerNewRating: number;
+  loserOldRating: number;
+  loserNewRating: number;
+  createdAt: Date;
+};
+
 // Users table - required by template
 export const users = pgTable("users", {
   id: serial("id").primaryKey(),

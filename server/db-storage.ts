@@ -1,7 +1,7 @@
-import { InsertPark, InsertUser, Matchup, Park, ParkWithRank, User, InsertMatchup, ParkIconType } from "../shared/schema";
+import { InsertPark, InsertUser, Matchup, Park, ParkWithRank, User, InsertMatchup, ParkIconType, LatestVoteResult } from "../shared/schema";
 import { IStorage } from "./storage";
 import { db, parksTable, matchupsTable, usersTable } from "./db";
-import { eq, sql, desc, asc } from "drizzle-orm";
+import { eq, sql, desc, asc, isNotNull } from "drizzle-orm";
 import postgres from "postgres";
 
 // Validate ParkIconType
@@ -210,6 +210,86 @@ export class DatabaseStorage implements IStorage {
     } catch (error) {
       console.error("Error in getRandomMatchup:", error);
       throw error;
+    }
+  }
+  
+  /**
+   * Get the latest matchup with vote result
+   */
+  async getLatestVoteResult(): Promise<LatestVoteResult | undefined> {
+    try {
+      // Get the most recent completed matchup
+      const latestMatchups = await db
+        .select()
+        .from(matchupsTable)
+        .where(isNotNull(matchupsTable.winnerId))
+        .orderBy(desc(matchupsTable.createdAt))
+        .limit(1);
+      
+      if (latestMatchups.length === 0) {
+        return undefined;
+      }
+      
+      const latestMatchup = latestMatchups[0];
+      
+      // Ensure we have all the required data
+      if (!latestMatchup.winnerId || 
+          !latestMatchup.park1OldRating || 
+          !latestMatchup.park2OldRating || 
+          !latestMatchup.park1NewRating || 
+          !latestMatchup.park2NewRating) {
+        return undefined;
+      }
+      
+      // Get the parks involved
+      const [park1, park2] = await this.getParksByIds([latestMatchup.park1Id, latestMatchup.park2Id]);
+      
+      if (!park1 || !park2) {
+        return undefined;
+      }
+      
+      const winner = latestMatchup.winnerId === park1.id ? park1 : park2;
+      const loser = latestMatchup.winnerId === park1.id ? park2 : park1;
+      
+      const winnerOldRating = latestMatchup.winnerId === park1.id 
+        ? latestMatchup.park1OldRating 
+        : latestMatchup.park2OldRating;
+      
+      const winnerNewRating = latestMatchup.winnerId === park1.id 
+        ? latestMatchup.park1NewRating 
+        : latestMatchup.park2NewRating;
+      
+      const loserOldRating = latestMatchup.winnerId === park1.id 
+        ? latestMatchup.park2OldRating 
+        : latestMatchup.park1OldRating;
+      
+      const loserNewRating = latestMatchup.winnerId === park1.id 
+        ? latestMatchup.park2NewRating 
+        : latestMatchup.park1NewRating;
+      
+      // Ensure we have a valid Date object for createdAt
+      const createdAt = new Date();
+      if (latestMatchup.createdAt) {
+        if (latestMatchup.createdAt instanceof Date) {
+          createdAt.setTime(latestMatchup.createdAt.getTime());
+        } else if (typeof latestMatchup.createdAt === 'string') {
+          createdAt.setTime(new Date(latestMatchup.createdAt).getTime());
+        }
+      }
+      
+      return {
+        id: latestMatchup.id,
+        winner,
+        loser,
+        winnerOldRating,
+        winnerNewRating,
+        loserOldRating,
+        loserNewRating,
+        createdAt
+      };
+    } catch (error) {
+      console.error("Error in getLatestVoteResult:", error);
+      return undefined;
     }
   }
   

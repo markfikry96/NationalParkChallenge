@@ -60,6 +60,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
   
+  // Get the latest vote result
+  app.get("/api/matchups/latest-result", async (req: Request, res: Response) => {
+    try {
+      const latestResult = await storage.getLatestVoteResult();
+      
+      if (!latestResult) {
+        return res.status(404).json({ message: "No vote results found" });
+      }
+      
+      res.json(latestResult);
+    } catch (error) {
+      console.error("Error fetching latest result:", error);
+      res.status(500).json({ message: "Failed to fetch latest vote result" });
+    }
+  });
+  
   app.post("/api/matchups/vote", async (req: Request, res: Response) => {
     try {
       // Validate the vote data
