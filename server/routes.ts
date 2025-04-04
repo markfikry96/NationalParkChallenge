@@ -55,6 +55,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         park2
       });
     } catch (error) {
+      console.error("Error creating matchup:", error);
       res.status(500).json({ message: "Failed to create matchup" });
     }
   });
@@ -104,14 +105,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
       await storage.updatePark(winner.id, {
         rating: winnerNewRating,
         trending: winnerChange > 10, // Mark as trending if rating changed significantly
-        lastChange: winner.lastChange > 0 ? winner.lastChange + 1 : 1 // Increase change count if already positive
+        lastChange: (winner.lastChange ?? 0) > 0 ? (winner.lastChange ?? 0) + 1 : 1 // Increase change count if already positive
       });
       
       // Update loser park
       await storage.updatePark(loser.id, {
         rating: loserNewRating,
         trending: loserChange > 10, // Mark as trending if rating changed significantly
-        lastChange: loser.lastChange < 0 ? loser.lastChange - 1 : -1 // Decrease change count if already negative
+        lastChange: (loser.lastChange ?? 0) < 0 ? (loser.lastChange ?? 0) - 1 : -1 // Decrease change count if already negative
       });
       
       // Update matchup with results

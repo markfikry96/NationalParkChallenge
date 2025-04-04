@@ -2,6 +2,7 @@ import { InsertPark, InsertUser, Matchup, Park, ParkWithRank, User, InsertMatchu
 import { IStorage } from "./storage";
 import { db, parksTable, matchupsTable, usersTable } from "./db";
 import { eq, sql, desc, asc } from "drizzle-orm";
+import postgres from "postgres";
 
 // Validate ParkIconType
 function validateParkIconType(iconType: string): ParkIconType {
@@ -53,8 +54,18 @@ export class DatabaseStorage implements IStorage {
   async getParksByIds(ids: number[]): Promise<Park[]> {
     if (ids.length === 0) return [];
     
-    // Using SQL in operator for getting multiple IDs
-    return db.select().from(parksTable).where(sql`${parksTable.id} IN (${ids.join(',')})`);
+    console.log("Getting parks with IDs:", ids);
+    
+    if (ids.length === 1) {
+      return db.select().from(parksTable).where(eq(parksTable.id, ids[0]));
+    }
+    
+    // Use individual promises for each park to avoid SQL injection issues
+    const promises = ids.map(id => this.getParkById(id));
+    const parks = await Promise.all(promises);
+    
+    // Filter out any undefined values
+    return parks.filter(park => park !== undefined) as Park[];
   }
 
   async createPark(park: InsertPark): Promise<Park> {
@@ -112,12 +123,30 @@ export class DatabaseStorage implements IStorage {
    * Matchup Methods
    */
   async createMatchup(matchup: InsertMatchup): Promise<Matchup> {
-    const insertedMatchups = await db
-      .insert(matchupsTable)
-      .values([matchup])
-      .returning();
-    
-    return insertedMatchups[0];
+    try {
+      console.log("Creating matchup with values:", JSON.stringify(matchup, null, 2));
+      
+      // Insert using Drizzle's API to avoid type issues
+      const insertedMatchups = await db
+        .insert(matchupsTable)
+        .values({
+          park1Id: Number(matchup.park1Id),
+          park2Id: Number(matchup.park2Id)
+        })
+        .returning();
+      
+      if (!insertedMatchups || insertedMatchups.length === 0) {
+        throw new Error("Failed to create matchup - no result returned");
+      }
+      
+      const newMatchup = insertedMatchups[0];
+      console.log("Created matchup:", newMatchup);
+      
+      return newMatchup;
+    } catch (error) {
+      console.error("Error in createMatchup:", error);
+      throw error;
+    }
   }
 
   async getMatchupById(id: number): Promise<Matchup | undefined> {
@@ -145,31 +174,43 @@ export class DatabaseStorage implements IStorage {
   }
 
   async getRandomMatchup(): Promise<{ id: number; park1Id: number; park2Id: number } | undefined> {
-    // Get all park IDs
-    const parks = await db.select({ id: parksTable.id }).from(parksTable);
-    
-    if (parks.length < 2) return undefined;
-    
-    // Select two random parks
-    const parkIds = parks.map(p => p.id);
-    const randomIndex1 = Math.floor(Math.random() * parkIds.length);
-    let randomIndex2 = Math.floor(Math.random() * (parkIds.length - 1));
-    if (randomIndex2 >= randomIndex1) randomIndex2++;
-    
-    const park1Id = parkIds[randomIndex1];
-    const park2Id = parkIds[randomIndex2];
-    
-    // Create a new matchup
-    const matchup = await this.createMatchup({
-      park1Id,
-      park2Id,
-    });
-    
-    return {
-      id: matchup.id,
-      park1Id: matchup.park1Id,
-      park2Id: matchup.park2Id,
-    };
+    try {
+      // Get all park IDs
+      const parks = await db.select({ id: parksTable.id }).from(parksTable);
+      console.log(`Found ${parks.length} parks in database`);
+      
+      if (parks.length < 2) {
+        console.log("Not enough parks for a matchup");
+        return undefined;
+      }
+      
+      // Select two random parks
+      const parkIds = parks.map(p => p.id);
+      console.log("Available park IDs:", parkIds);
+      
+      const randomIndex1 = Math.floor(Math.random() * parkIds.length);
+      let randomIndex2 = Math.floor(Math.random() * (parkIds.length - 1));
+      if (randomIndex2 >= randomIndex1) randomIndex2++;
+      
+      const park1Id = parkIds[randomIndex1];
+      const park2Id = parkIds[randomIndex2];
+      console.log(`Selected parks for matchup: ${park1Id} vs ${park2Id}`);
+      
+      // Create a new matchup
+      const matchup = await this.createMatchup({
+        park1Id,
+        park2Id,
+      });
+      
+      return {
+        id: matchup.id,
+        park1Id: matchup.park1Id,
+        park2Id: matchup.park2Id,
+      };
+    } catch (error) {
+      console.error("Error in getRandomMatchup:", error);
+      throw error;
+    }
   }
   
   /**
