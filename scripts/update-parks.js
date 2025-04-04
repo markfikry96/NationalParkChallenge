@@ -270,38 +270,27 @@ async function fetchParkData(parkName) {
  */
 async function fetchParkList() {
   try {
-    const url = 'https://en.wikipedia.org/wiki/List_of_national_parks_of_the_United_States';
-    console.log(`Fetching national parks list from ${url}`);
+    // Use our predefined list of 63 parks
+    const parkNames = [
+      "Acadia", "American Samoa", "Arches", "Badlands", "Big Bend", 
+      "Biscayne", "Black Canyon of the Gunnison", "Bryce Canyon", "Canyonlands", "Capitol Reef",
+      "Carlsbad Caverns", "Channel Islands", "Congaree", "Crater Lake", "Cuyahoga Valley",
+      "Death Valley", "Denali", "Dry Tortugas", "Everglades", "Gates of the Arctic",
+      "Gateway Arch", "Glacier", "Glacier Bay", "Grand Canyon", "Grand Teton",
+      "Great Basin", "Great Sand Dunes", "Great Smoky Mountains", "Guadalupe Mountains", "Haleakalā",
+      "Hawaiʻi Volcanoes", "Hot Springs", "Indiana Dunes", "Isle Royale", "Joshua Tree",
+      "Katmai", "Kenai Fjords", "Kings Canyon", "Kobuk Valley", "Lake Clark",
+      "Lassen Volcanic", "Mammoth Cave", "Mesa Verde", "Mount Rainier", "New River Gorge",
+      "North Cascades", "Olympic", "Petrified Forest", "Pinnacles", "Redwood",
+      "Rocky Mountain", "Saguaro", "Sequoia", "Shenandoah", "Theodore Roosevelt",
+      "Virgin Islands", "Voyageurs", "White Sands", "Wind Cave", "Wrangell–St. Elias",
+      "Yellowstone", "Yosemite", "Zion"
+    ];
     
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`Failed to fetch parks list: ${response.statusText}`);
-    }
-    
-    const html = await response.text();
-    const $ = cheerio.load(html);
-    
-    // Extract park names from the table
-    const parkNames = [];
-    
-    // The parks are in a table with links to each park
-    $('.wikitable tbody tr').each((i, row) => {
-      const firstCell = $(row).find('td:first-child');
-      if (firstCell.length) {
-        const parkLink = firstCell.find('a').first();
-        if (parkLink.length) {
-          const name = parkLink.text().trim();
-          if (name && !parkNames.includes(name)) {
-            parkNames.push(name);
-          }
-        }
-      }
-    });
-    
-    console.log(`Found ${parkNames.length} national parks`);
+    console.log(`Using predefined list of ${parkNames.length} national parks`);
     return parkNames;
   } catch (error) {
-    console.error('Error fetching park list:', error);
+    console.error('Error generating park list:', error);
     return [];
   }
 }
@@ -636,15 +625,8 @@ async function fetchAllParksData() {
   }
   
   // Determine how many parks to process in this batch
-  let batchSize = 10; // Default size
-  
-  // If we have more than 40 parks, process them all remaining
-  // If we have more than 20, process 20 more
-  if (parksData.length > 40) {
-    batchSize = parkNames.length;
-  } else if (parksData.length > 20) {
-    batchSize = 20;
-  }
+  // Process all remaining parks at once
+  let batchSize = parkNames.length;
   
   // Limit batch to the number of remaining parks
   batchSize = Math.min(batchSize, parkNames.length);

@@ -25,20 +25,22 @@ async function migrateParksToDatabase() {
     const existingParks = await db.select().from(parksTable);
     const parkCount = existingParks.length;
     
-    if (parkCount > 0) {
-      console.log(`Database already has ${parkCount} parks. Skipping migration.`);
-      return;
-    }
+    // Get existing park names for checking
+    const existingParkNames = existingParks.map(park => park.name);
     
     // Read the park data from the JSON file
     const parksFilePath = path.join(process.cwd(), 'park-data.json');
     const parksData = JSON.parse(fs.readFileSync(parksFilePath, 'utf-8'));
     
     console.log(`Found ${parksData.length} parks in the JSON file. Starting migration...`);
+    console.log(`Database already has ${parkCount} parks.`);
     
-    // Insert each park into the database
+    let insertedCount = 0;
+    let updatedCount = 0;
+    
+    // Insert/update each park into the database
     for (const park of parksData) {
-      const parkToInsert = {
+      const parkData = {
         name: park.name,
         description: park.description,
         iconType: validateParkIconType(park.iconType),
@@ -48,22 +50,39 @@ async function migrateParksToDatabase() {
         lastChange: park.lastChange || 0
       };
       
-      await db.insert(parksTable).values([parkToInsert]);
-      console.log(`Inserted park: ${parkToInsert.name}`);
+      // Check if park already exists
+      if (existingParkNames.includes(park.name)) {
+        // Update existing park
+        const existingPark = existingParks.find(p => p.name === park.name);
+        if (existingPark) {
+          await db
+            .update(parksTable)
+            .set(parkData)
+            .where(eq(parksTable.name, park.name));
+          console.log(`Updated park: ${park.name}`);
+          updatedCount++;
+        }
+      } else {
+        // Insert new park
+        await db.insert(parksTable).values([parkData]);
+        console.log(`Inserted park: ${park.name}`);
+        insertedCount++;
+      }
     }
     
-    // Update rankings
-    const parks = await db.select().from(parksTable).orderBy(parksTable.rating);
+    // Update rankings - sort by rating (descending) to assign ranks
+    const parks = await db.select().from(parksTable).orderBy({ ascending: false, column: parksTable.rating });
     
     for (let i = 0; i < parks.length; i++) {
       const park = parks[i];
       await db
         .update(parksTable)
-        .set({ rank: parks.length - i })
+        .set({ rank: i + 1 })
         .where(eq(parksTable.id, park.id));
     }
     
-    console.log('Migration completed successfully!');
+    console.log(`Migration completed successfully! Added ${insertedCount} new parks, updated ${updatedCount} existing parks.`);
+    console.log(`Total parks in database: ${parks.length}`);
   } catch (error) {
     console.error('Error during migration:', error);
     process.exit(1);

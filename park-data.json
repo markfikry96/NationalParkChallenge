@@ -115,5 +115,248 @@
     "rating": 1500,
     "trending": false,
     "lastChange": 0
+  },
+  {
+    "name": "Glacier Bay",
+    "description": "Located in Hoonah-Angoon Census Area and Yakutat City and Borough, Alaska, United States. Glacier Bay National Park and Preserve is a national park of the United States located in Southeast Alaska west of Juneau. President Calvin Coolidge proclaimed the area around Glacier Bay a national monument under the Antiquities Act on February 26, 1925. Subsequent to an expansion of the monument by President Jimmy Carter in 1978, the Alaska National Interest Lands Conservation Act (ANILCA) enlarged the national monument by 523,000 acres (817.2 sq mi; 2,116.5 km2) on December 2, 1980, and cr...",
+    "iconType": "mountain",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/A045%2C_Glacier_Bay_National_Park%2C_Alaska%2C_USA%2C_Johns_Hopkins_Glacier%2C_2002.jpg/284px-A045%2C_Glacier_Bay_National_Park%2C_Alaska%2C_USA%2C_Johns_Hopkins_Glacier%2C_2002.jpg",
+    "rating": 1500,
+    "trending": false,
+    "lastChange": 0
+  },
+  {
+    "name": "Grand Teton",
+    "description": "Located in Teton County, Wyoming, United States. Grand Teton National Park is a national park of the United States in northwestern Wyoming. At approximately 310,000 acres (1,300 km2), the park includes the major peaks of the 40-mile-long (64 km) Teton Range as well as most of the northern sections of the valley known as Jackson Hole. Grand Teton National Park is 10 miles (16 km) south of Yellowstone National Park, to which it is connected by the John D. Rockefeller Jr. Memorial Parkway which is managed by the National Park Service. Along wi...",
+    "iconType": "mountain",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Barns_grand_tetons.jpg/284px-Barns_grand_tetons.jpg",
+    "rating": 1500,
+    "trending": false,
+    "lastChange": 0
+  },
+  {
+    "name": "Great Smoky Mountains",
+    "description": "Located in Swain & Haywood counties in North Carolina; Sevier, Blount, & Cocke counties in Tennessee, United States. Great Smoky Mountains National Park is a national park of the United States in the southeast, with parts in North Carolina and Tennessee. The park straddles the ridgeline of the Great Smoky Mountains, part of the Blue Ridge Mountains, which are a division of the larger Appalachian Mountain chain. The park contains some of the highest mountains in eastern North America, including Kuwohi, Mount Guyot, and Mount Le Conte. The border between the two states runs northeast to southwest through the ...",
+    "iconType": "mountain",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/View_atop_Cliff_Tops_on_Mount_LeConte%2C_GSMNP%2C_TN.jpg/330px-View_atop_Cliff_Tops_on_Mount_LeConte%2C_GSMNP%2C_TN.jpg",
+    "rating": 1500,
+    "trending": false,
+    "lastChange": 0
+  },
+  {
+    "name": "Haleakalā",
+    "description": "Located in Maui County, Hawaii, United States. Haleakalā National Park is a national park of the United States located on the island of Maui, Hawaii. Named after Haleakalā, a dormant volcano within its boundaries, the park covers an area of 33,265 acres (52.0 sq mi; 134.6 km2), of which 24,719 acres (38.6 sq mi; 100.0 km2) is a wilderness area. The land was designated a national park in 1976 and its boundaries expanded in 2005.",
+    "iconType": "volcanic",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Haleakala_National_Park_02.jpg/284px-Haleakala_National_Park_02.jpg",
+    "rating": 1500,
+    "trending": false,
+    "lastChange": 0
+  },
+  {
+    "name": "Hawaiʻi Volcanoes",
+    "description": "Located in Hawaii County, Hawaii, United States. Hawaiʻi Volcanoes National Park is a national park of the United States located in Hawaii on the island of Hawaii. The park encompasses two active volcanoes: Kīlauea, one of the world's most active volcanoes, and Mauna Loa, the world's largest shield volcano. The park provides scientists with insight into the development of the Hawaiian Islands and access for studies of volcanism. For visitors, the park offers dramatic volcanic landscapes, glimpses of rare flora and fauna, and a view into the...",
+    "iconType": "volcanic",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/P%C4%81hoehoe_and_Aa_flows_at_Hawaii.jpg/330px-P%C4%81hoehoe_and_Aa_flows_at_Hawaii.jpg",
+    "rating": 1500,
+    "trending": false,
+    "lastChange": 0
+  },
+  {
+    "name": "Isle Royale",
+    "description": "Located in Keweenaw County, Michigan, United States. Isle Royale National Park is a national park of the United States consisting of Isle Royale, along with more than 400 small adjacent islands and the surrounding waters of Lake Superior, in Michigan.",
+    "iconType": "lake",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Edisen_Fishery_at_IRNP.jpg/284px-Edisen_Fishery_at_IRNP.jpg",
+    "rating": 1500,
+    "trending": false,
+    "lastChange": 0
+  },
+  {
+    "name": "Joshua Tree",
+    "description": "Located in Riverside County and San Bernardino County, California, United States. Joshua Tree National Park is a US National Park located in southeastern California, straddling north-central Riverside County and part of southern San Bernardino County. Named after the endemic Joshua tree (Yucca brevifolia), found in the park and surrounding areas, Joshua Tree is situated some 130 miles (211 km) east of the city of Los Angeles and roughly 78 mi (125 km) east of the city of San Bernardino. Among some of the closest cities to the park are Indio, Palm Desert, and Palm Springs. ...",
+    "iconType": "desert",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Joshua_Tree_-_Cyclops_%2B_Potato_Head_-_Sunrise.jpg/330px-Joshua_Tree_-_Cyclops_%2B_Potato_Head_-_Sunrise.jpg",
+    "rating": 1500,
+    "trending": false,
+    "lastChange": 0
+  },
+  {
+    "name": "Kings Canyon",
+    "description": "Located in Fresno and Tulare counties, California. Kings Canyon National Park is a national park of the United States in the southern Sierra Nevada, in Fresno and Tulare Counties, California. Originally established in 1890 as General Grant National Park, the park was greatly expanded and renamed on March 4, 1940. The park's namesake, Kings Canyon, is a rugged glacier-carved valley more than a mile (1,600 m) deep. Other natural features include multiple 14,000-foot (4,300 m) peaks, high mountain meadows, swift-flowing rivers, and some of the w...",
+    "iconType": "canyon",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/KingsCanyonNP.JPG/330px-KingsCanyonNP.JPG",
+    "rating": 1500,
+    "trending": false,
+    "lastChange": 0
+  },
+  {
+    "name": "Mammoth Cave",
+    "description": "Located in Edmonson, Hart, and Barren counties, Kentucky, U.S.. Mammoth Cave National Park is a national park of the United States in south-central Kentucky. It encompasses portions of Mammoth Cave, the longest known cave system in the world. The park's 52,830 acres (21,380 ha) are located primarily in Edmonson County, with small areas extending eastward into Hart and Barren counties. The Green River runs through the park, with a tributary called the Nolin River feeding into the Green just inside the park.",
+    "iconType": "cave",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Mammoth_Cave_Rotunda_%28USGS_Lwt02830%29.jpg/284px-Mammoth_Cave_Rotunda_%28USGS_Lwt02830%29.jpg",
+    "rating": 1500,
+    "trending": false,
+    "lastChange": 0
+  },
+  {
+    "name": "Mesa Verde",
+    "description": "Located in Montezuma County, Colorado,United States,North America. Mesa Verde National Park is a national park of the United States and UNESCO World Heritage Site located in Montezuma County, Colorado, and the only World Heritage Site in Colorado. The park protects some of the best-preserved Ancestral Puebloan ancestral sites in the United States.",
+    "iconType": "mountain",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Cliff_Palace-Colorado-Mesa_Verde_NP.jpg/330px-Cliff_Palace-Colorado-Mesa_Verde_NP.jpg",
+    "rating": 1500,
+    "trending": false,
+    "lastChange": 0
+  },
+  {
+    "name": "Olympic",
+    "description": "Located in Jefferson, Clallam, Mason, and Grays Harbor counties, Washington, United States. Olympic National Park is a national park of the United States located in Washington, on the Olympic Peninsula. The park has four regions: the Pacific coastline, alpine areas, the west-side temperate rainforest, and the forests of the drier east side. Within the park there are three distinct ecosystems, including subalpine forest and wildflower meadow, temperate forest, and the rugged Pacific coast.",
+    "iconType": "coastal",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Cedar_Creek_Abbey_Island_Ruby_Beach.jpg/278px-Cedar_Creek_Abbey_Island_Ruby_Beach.jpg",
+    "rating": 1500,
+    "trending": false,
+    "lastChange": 0
+  },
+  {
+    "name": "Redwood",
+    "description": "Located in Humboldt County & Del Norte County, California, US. The Redwood National and State Parks (RNSP) are a complex of one United States national park and three California state parks located along the coast of northern California. The combined RNSP contains Redwood National Park, Del Norte Coast Redwoods State Park, Jedediah Smith Redwoods State Park, and Prairie Creek Redwoods State Park. The parks' 139,000 acres (560 km2) preserve 45 percent of all remaining old-growth coast redwood forests.",
+    "iconType": "coastal",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Redwood_National_Park%2C_fog_in_the_forest.jpg/330px-Redwood_National_Park%2C_fog_in_the_forest.jpg",
+    "rating": 1500,
+    "trending": false,
+    "lastChange": 0
+  },
+  {
+    "name": "Rocky Mountain",
+    "description": "Located in Larimer / Grand / Boulder counties, Colorado, United States. Rocky Mountain National Park is a national park of the United States located approximately 55 mi (89 km) northwest of Denver in north-central Colorado, within the Front Range of the Rocky Mountains. The park is situated between the towns of Estes Park to the east and Grand Lake to the west. The eastern and western slopes of the Continental Divide run directly through the center of the park with the headwaters of the Colorado River located in the park's northwestern region. The main features o...",
+    "iconType": "lake",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Rocky_Mountain_National_Park_in_September_2011_-_Glacier_Gorge_from_Bear_Lake.JPG/330px-Rocky_Mountain_National_Park_in_September_2011_-_Glacier_Gorge_from_Bear_Lake.JPG",
+    "rating": 1500,
+    "trending": false,
+    "lastChange": 0
+  },
+  {
+    "name": "Sequoia",
+    "description": "Located in Tulare County, California, United States. Sequoia National Park is a national park of the United States in the southern Sierra Nevada east of Visalia, California. The park was established on September 25, 1890, and today protects 404,064 acres (631 sq mi; 163,519 ha; 1,635 km2) of forested mountainous terrain. Encompassing a vertical relief of nearly 13,000 feet (4,000 m), the park contains the highest point in the contiguous United States, Mount Whitney, at 14,505 feet (4,421 m) above sea level. The park is south of, and contiguous ...",
+    "iconType": "coastal",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/General_Sherman_Tree_in_Sequoia_National_Park_-_June_2022.jpg/250px-General_Sherman_Tree_in_Sequoia_National_Park_-_June_2022.jpg",
+    "rating": 1500,
+    "trending": false,
+    "lastChange": 0
+  },
+  {
+    "name": "Wrangell–St. Elias",
+    "description": "Located in Chugach Census Area, Copper River Census Area, Southeast Fairbanks Census Area and Yakutat City and Borough, Alaska, United States. Wrangell–St. Elias National Park and Preserve is a United States national park and preserve in south central Alaska. The park, the largest in the United States, covers the Wrangell Mountains and a large portion of the Saint Elias Mountains, which include most of the highest peaks in the United States and Canada, yet are within 10 miles (16 km) of tidewater, one of the highest reliefs in the world. The park's high point is Mount Saint Elias at 18,008 feet (5,489 m), the second tallest mountain...",
+    "iconType": "lake",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Mt_Saint_Elias%2C_South_Central_Alaska.jpg/330px-Mt_Saint_Elias%2C_South_Central_Alaska.jpg",
+    "rating": 1500,
+    "trending": false,
+    "lastChange": 0
+  },
+  {
+    "name": "Acadia",
+    "description": "Located in Hancock & Knox counties, Maine, United States. Acadia National Park is a national park of the United States located along the mid-section of the Maine coast, southwest of Bar Harbor. The park includes about half of Mount Desert Island, part of the Isle au Haut, the tip of the Schoodic Peninsula, and portions of sixteen smaller outlying islands.",
+    "iconType": "coastal",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Bass_Harbor_Lighthouse_b.jpg/330px-Bass_Harbor_Lighthouse_b.jpg",
+    "rating": 1500,
+    "trending": false,
+    "lastChange": 0
+  },
+  {
+    "name": "American Samoa",
+    "description": "Located in American Samoa, United States. The National Park of American Samoa is a national park of the United States located in the territory of American Samoa, distributed across three islands: Tutuila, Ofu, and Taʻū. The park preserves and protects coral reefs, tropical rainforests, fruit bats, and the Samoan culture. Popular activities include hiking and snorkeling. Of the park's 8,257 acres (3,341 ha), 2,500 acres (1,000 ha) is coral reefs and ocean. The park is the only American National Park Service system unit south of the eq...",
+    "iconType": "coastal",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Pola_Islands_Tutuila_NPS.jpg/284px-Pola_Islands_Tutuila_NPS.jpg",
+    "rating": 1500,
+    "trending": false,
+    "lastChange": 0
+  },
+  {
+    "name": "Arches",
+    "description": "Located in Grand County, Utah, US. Arches National Park is a national park of the United States in eastern Utah. The park is adjacent to the Colorado River, 4 mi (6 km) north of Moab, Utah. The park contains more than 2,000 natural sandstone arches, including the well-known Delicate Arch, which constitute the highest density of natural arches in the world. It also contains a variety of other unique geological resources and formations. The national park lies above an underground evaporite layer or salt bed, which is the main ca...",
+    "iconType": "mountain",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Delicate_arch_sunset.jpg/330px-Delicate_arch_sunset.jpg",
+    "rating": 1500,
+    "trending": false,
+    "lastChange": 0
+  },
+  {
+    "name": "Badlands",
+    "description": "Located in South Dakota, United States. Badlands National Park (Lakota: Makȟóšiča) is a national park of the United States in southwestern South Dakota. The park protects 242,756 acres (379.3 sq mi; 982.4 km2) of sharply eroded buttes and pinnacles, along with the largest undisturbed mixed grass prairie in the United States. The National Park Service manages the park, with the South Unit being co-managed with the Oglala Lakota tribe.",
+    "iconType": "mountain",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/MK00609_Badlands.jpg/330px-MK00609_Badlands.jpg",
+    "rating": 1500,
+    "trending": false,
+    "lastChange": 0
+  },
+  {
+    "name": "Biscayne",
+    "description": "Located in Miami-Dade County, Florida, U.S.. Biscayne National Park is a national park of the United States located south of Miami, Florida, in Miami-Dade County. The park preserves Biscayne Bay and its offshore barrier reefs. Ninety-five percent of the park is water, and the shore of the bay is the location of an extensive mangrove forest. The park covers 172,971 acres (69,998.9 ha; 270.3 sq mi; 700.0 km2) and includes Elliott Key, the park's largest island and northernmost of the true Florida Keys, formed from fossilized coral reef. T...",
+    "iconType": "lake",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Biscayne.JPG/330px-Biscayne.JPG",
+    "rating": 1500,
+    "trending": false,
+    "lastChange": 0
+  },
+  {
+    "name": "Black Canyon of the Gunnison",
+    "description": "Located in Montrose County, Colorado, United States. Black Canyon of the Gunnison National Park is a national park of the United States located in western Colorado and managed by the National Park Service. The Black Canyon of the Gunnison was established as a national monument on March 2, 1933. It was redesignated a national park on October 21, 1999, and incorporated 4,000 acres owned by the Bureau of Land Management. The Gunnison Gorge National Conservation Area was created at the same time. There are two primary entrances to the park: the sou...",
+    "iconType": "canyon",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Black_Canyon_and_Gunnison_River_2008.jpg/330px-Black_Canyon_and_Gunnison_River_2008.jpg",
+    "rating": 1500,
+    "trending": false,
+    "lastChange": 0
+  },
+  {
+    "name": "Bryce Canyon",
+    "description": "Located in Garfield County and Kane County, Utah, United States. Bryce Canyon National Park (/braɪs/) is a national park of the United States located in southwestern Utah. The major feature of the park is Bryce Canyon, which despite its name, is not a canyon, but a collection of giant natural amphitheaters along the eastern side of the Paunsaugunt Plateau. Bryce is distinctive due to geological structures called hoodoos, formed by frost weathering and stream erosion of the river and lake bed sedimentary rock. The red, orange, and white colors of the rocks ...",
+    "iconType": "canyon",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Inspiration_Point_Bryce_Canyon_November_2018_panorama.jpg/330px-Inspiration_Point_Bryce_Canyon_November_2018_panorama.jpg",
+    "rating": 1500,
+    "trending": false,
+    "lastChange": 0
+  },
+  {
+    "name": "Canyonlands",
+    "description": "Located in San Juan, Wayne, Garfield, and Grand counties, Utah, United States. Canyonlands National Park is a national park of the United States located in southeastern Utah near the town of Moab. The park preserves a colorful landscape eroded into numerous canyons, mesas, and buttes by the Colorado River, the Green River, and their respective tributaries. Legislation creating the park was signed into law by President Lyndon B. Johnson on September 12, 1964.",
+    "iconType": "canyon",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Green_River_Overlook_Ekker_Butte.jpg/284px-Green_River_Overlook_Ekker_Butte.jpg",
+    "rating": 1500,
+    "trending": false,
+    "lastChange": 0
+  },
+  {
+    "name": "Capitol Reef",
+    "description": "Located in Wayne,. Capitol Reef National Park is a national park of the United States in south-central Utah. The park is approximately 60 miles (100 km) long on its north–south axis and just 6 miles (10 km) wide on average. The park was established in 1971 to preserve 241,904 acres (377.98 sq mi; 97,895.08 ha; 978.95 km2) of desert landscape and is open all year, with May through September receiving the most visitors.",
+    "iconType": "desert",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Capitol_Reef_National_Park.jpg/330px-Capitol_Reef_National_Park.jpg",
+    "rating": 1500,
+    "trending": false,
+    "lastChange": 0
+  },
+  {
+    "name": "Crater Lake",
+    "description": "Located in Klamath County, Oregon, United States. Crater Lake National Park is a national park of the United States located in southern Oregon. Established in 1902, Crater Lake is the fifth-oldest national park in the United States and the only national park in Oregon. The park encompasses the caldera of Crater Lake, a remnant of Mount Mazama, a destroyed volcano, and the surrounding hills and forests.",
+    "iconType": "volcanic",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Above_Crater_Lake_%28cropped%29.jpg/284px-Above_Crater_Lake_%28cropped%29.jpg",
+    "rating": 1500,
+    "trending": false,
+    "lastChange": 0
+  },
+  {
+    "name": "Cuyahoga Valley",
+    "description": "Located in Summit County & Cuyahoga County, Ohio, United States. Cuyahoga Valley National Park is a national park of the United States in Ohio that reclaims and preserves the industrial, commercial, and rural landscape along the Cuyahoga River between Akron and Cleveland in Northeast Ohio.",
+    "iconType": "mountain",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Cuyahoga_Valley_National_Park_20.jpg/330px-Cuyahoga_Valley_National_Park_20.jpg",
+    "rating": 1500,
+    "trending": false,
+    "lastChange": 0
+  },
+  {
+    "name": "Gates of the Arctic",
+    "description": "Located in Bettles, Alaska. Gates of the Arctic National Park and Preserve is a national park of the United States that protects portions of the Brooks Range in northern Alaska. The park is the northernmost national park in the United States, situated entirely north of the Arctic Circle. The area of the park and preserve is the second largest in the U.S. at 8,472,506 acres (13,238 sq mi; 34,287 km2); the National Park portion is the second largest in the U.S., after the National Park portion of Wrangell–St. Elias Nation...",
+    "iconType": "mountain",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Remote_river_in_Gates_of_the_Arctic_%2816524035298%29.jpg/330px-Remote_river_in_Gates_of_the_Arctic_%2816524035298%29.jpg",
+    "rating": 1500,
+    "trending": false,
+    "lastChange": 0
   }
 ]
